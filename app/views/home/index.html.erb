@@ -2,20 +2,23 @@
       .jumbotron {
       background-image: url(landing_img.jpg);
       background-size: cover;
-      min-height: 921px;
+      background-position: center;
+      /*min-height: 921px;*/
+      border-radius: 0px!important;
       padding: 150px 0;
       }
     </style>
+
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
   <div class="row">
-    <div class="col col-sm-12 col-md-5">
+    <div class="col col-sm-12 col-xs-12 col-md-5">
       <div class="pt-4 mt-4">
         <h1 class="display-4">Flats</h1>
     </div>
   </div>
   <div class="row">
-    <div class="col col-sm-12 col-md-5">
+    <div class="col-lg-5 col-sm-12 col-xs-12 col-md-12">
       <div class="pt-4 mt-4">
         <p class="lead" style = "color: white">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
         Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
@@ -23,19 +26,22 @@
         Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
       </div>
     </div>
-    <div class="col col-sm-12 col-md-5 offset-md-1" style = "color: white">
+    <div class="col-lg-5 col-sm-12 col-xs-12 col-md-12 offset-lg-1" style = "color: white">
       <div class="pt-4 mt-4">
-        <form>
+
+        <form action="/users" method="post">
+          <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
           <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <label for="user_email">Email address</label>
+            <input type="email" class="form-control" name="user[email]" id="user_email" aria-describedby="emailHelp" placeholder="Enter email">
           </div>
           <div class="form-group mt-3">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <label for="user_name">Username</label>
+            <input type="text" class="form-control" name="user[name]" id="user_name" placeholder="Username" aria-label="Username" aria-describedby="addon-wrapping">
           </div>
-          <button type="submit" class="btn mt-3 btn-outline-light">Submit</button>
+          <button type="submit" name="commit" class="btn mt-3 btn-outline-light">Submit</button>
         </form>
+
       </div> 
     </div>
     
