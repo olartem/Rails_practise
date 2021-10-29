@@ -1,4 +1,4 @@
 class Micropost < ApplicationRecord
-  belongs_to :user
-  validates :content, presence: true
+    belongs_to :user
+    validates :title, :body, presence: true
 end

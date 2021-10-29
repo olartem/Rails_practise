@@ -1,14 +1,55 @@
+<style>
+body {
+    background: #f5f5f5;
 
+    min-height: 100vh;
+}
+.profile-header {
+    transform: translateY(5rem);
+}
+</style>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
+<div class="row py-5 px-4">
+    <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
 
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
+        <!-- Profile widget -->
+        <div class="bg-white shadow rounded overflow-hidden">
+            <div class="px-4 pt-0 pb-4 bg-dark">
+                <div class="media align-items-end profile-header">
+                    <div class="profile mr-3">
+                    <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="..." width="130" class="rounded mb-2 img-thumbnail">  
+                    </div>
+                    
+                    <div class="media-body mb-5 text-white">
+                        <h4 class="mt-0 mb-0"><%=@user.name.capitalize%></h4>
+                        <p class="small mb-4"> <i class="fa fa-user mr-2"></i><%=distance_of_time_in_words(@user.microposts.all.first.created_at, Time.now) +" ago" %></p>
+                         <%if current_page?(user_path(current_user))%>
+                        <%= link_to "New micropost", new_user_micropost_path(@user), class: "btn btn-outline-light btn-sm btn-block mb-3" %>
+                        <%end%>
+                    </div>
+                </div>
+                
+            </div>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
+            <div class="bg-light p-4 d-flex justify-content-end text-center">
+                <ul class="list-inline mb-0">
+                    <li class="list-inline-item">
+                      <h5 class="font-weight-bold mb-0 d-block"><%=@user.microposts.all.count%></h5><small class="text-muted"> <i class="fa fa-paper-plane mr-1"></i>Microposts</small>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="py-4 px-4">
+                <div class="py-4">
+                    <h5 class="mb-3"><%="#{@user.name.capitalize}'s posts"%></h5>
+                    <%@user.microposts.order(created_at: :desc).each do |micropost| %>
+                    <div class="p-4 bg-light rounded shadow-sm mb-3">
+                      <p class="h5 mb-1 "><%=micropost.title.capitalize%></p>
+                      <p class="font-italic mb-0"><%=micropost.body.capitalize%></p>
+                    </div>
+                    <%end%>
+                </div>
+            </div>
+
+    </div>
+</div>
