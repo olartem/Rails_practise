@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, :authenticate_user!, only: %i[ show edit update destroy ]
+  before_action :set_user, :authenticate_user!, only: %i[ show edit update destroy likes_count]
 
   # GET /users or /users.json
   def index
@@ -8,6 +8,14 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
+    @count=0
+    @user.microposts.each do |micropost|
+      @count+=micropost.get_upvotes.size
+    end
+    respond_to do |format|
+      format.js {render layout: false}
+      format.html {render 'show'}
+    end
   end
 
   # GET /users/new
@@ -53,6 +61,13 @@ class UsersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to users_url, notice: "User was successfully destroyed." }
       format.json { head :no_content }
+    end
+  end
+  
+  def likes_count
+    count=0
+    self.microposts.each do |micropost|
+      count+=micropost.get_upvotes.size
     end
   end
 

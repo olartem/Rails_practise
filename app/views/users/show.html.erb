@@ -17,7 +17,11 @@ body {
             <div class="px-4 pt-0 pb-4 bg-dark">
                 <div class="media align-items-end profile-header">
                     <div class="profile mr-3">
+                    <%if @user.avatar.attached?%>
+                    <img src="<%=(url_for(@user.avatar))%>" alt="..." width="130" class="rounded mb-2 img-thumbnail">
+                    <%else%>
                     <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" alt="..." width="130" class="rounded mb-2 img-thumbnail">  
+                    <%end%>
                     </div>
                     
                     <div class="media-body mb-5 text-white">
@@ -34,6 +38,9 @@ body {
             <div class="bg-light p-4 d-flex justify-content-end text-center">
                 <ul class="list-inline mb-0">
                     <li class="list-inline-item">
+                      <h5 class="font-weight-bold mb-0 d-block"><%=render 'microposts/all_likes'%></h5><small class="text-muted"> <i class="fa fa-heart mr-1"></i>Likes</small>
+                    </li>
+                    <li class="list-inline-item">
                       <h5 class="font-weight-bold mb-0 d-block"><%=@user.microposts.all.count%></h5><small class="text-muted"> <i class="fa fa-paper-plane mr-1"></i>Microposts</small>
                     </li>
                 </ul>
@@ -46,6 +53,13 @@ body {
                     <div class="p-4 bg-light rounded shadow-sm mb-3">
                       <p class="h5 mb-1 "><%=micropost.title.capitalize%></p>
                       <p class="font-italic mb-0"><%=micropost.body.capitalize%></p>
+                        <ul class="list-inline small text-muted mt-3 mb-0">
+                            <li class="list-inline-item">
+                            
+                            <%= render "microposts/like_link", micropost: micropost%>
+                            <%= render "microposts/likes", micropost: micropost %>
+                            </li>
+                        </ul>
                     </div>
                     <%end%>
                 </div>
