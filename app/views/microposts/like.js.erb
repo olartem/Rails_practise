@@ -1,3 +1,2 @@
-$("#like-count").replaceWith("<%= j render 'microposts/likes', micropost: @micropost%>")
-$("#like-link").replaceWith("<%= j render 'microposts/like_link', micropost: @micropost%>")
-$("#all-likes-count").replaceWith("<%= j render partial: 'microposts/all_likes', micropost: @micropost%>")
+$("#likes").html("<%= j render 'microposts/posts_form', user: @user %>");
+$("#all-likes-count").html("<%= j render 'microposts/all_likes'%>");

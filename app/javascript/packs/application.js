@@ -14,6 +14,7 @@ import "channels"
 import "bootstrap"
 import "../stylesheets/application.scss"
 import "jquery"
+import "@fortawesome/fontawesome-free/css/all"
 
 
 

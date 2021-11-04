@@ -1,8 +1,9 @@
 <span id='all-likes-count'>
-    <%  @count=0
+    <%  
+        @count=0
         @user.microposts.each do |micropost|
         @count+=micropost.get_upvotes.size
-    end
+        end
     %>
     <%=@count%>
 </span>

@@ -2,14 +2,13 @@
 body {
     background: #f5f5f5;
 
-    min-height: 100vh;
 }
 .profile-header {
     transform: translateY(5rem);
 }
 </style>
 
-<div class="row py-5 px-4">
+<div class="py-5 px-4">
     <div class="col-xl-4 col-md-6 col-sm-10 mx-auto">
 
         <!-- Profile widget -->
@@ -28,7 +27,7 @@ body {
                             <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" style="float:left"; alt="..." width="50" class="rounded mb-2 img-thumbnail mr-2">  
                         <%end%>
 
-                        <br><h5 class="mb-3 ml-3"><%="#{user.name.capitalize}'s posts"%></h5>
+                        <br><h5 class="mb-3 ml-3"><%=link_to "#{user.name.capitalize}'s posts", user_path(user), style:'color:black'%></h5>
                         <%user.microposts.order(created_at: :desc).each do |micropost|%>
                     
                         
@@ -37,7 +36,7 @@ body {
                         <p class="font-italic mb-0"><%=micropost.body.capitalize%></p>
                             <ul class="list-inline small text-muted mt-3 mb-0">
                                 <li class="list-inline-item">
-                                <%if current_user.voted_for?(micropost)%>
+                                <%if user_signed_in? && current_user.voted_for?(micropost)%>
                                 <i class='fa fa-heart' style = 'color:red'></i><%= render "microposts/likes", micropost: micropost %>
                                 <%else%>
                                 <i class='fa fa-heart-o' style = 'color:red'></i><%= render "microposts/likes", micropost: micropost %>

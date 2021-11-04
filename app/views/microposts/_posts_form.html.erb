@@ -1,0 +1,30 @@
+<div id='likes'>
+        <h5 class="mb-3"><%="#{user.name.capitalize}'s posts"%></h5>
+        <%user.microposts.order(created_at: :desc).each do |micropost| %>
+            <div class="p-4 bg-light rounded shadow-sm mb-3">
+                <p class="h5 mb-1 "><%=micropost.title.capitalize%></p>
+                <p class="font-italic mb-0"><%=micropost.body.capitalize%></p>
+                <ul class="list-inline small text-muted mt-3 mb-0">
+                    <li class="list-inline-item">
+                                
+                        <span>
+                        <%if current_user.voted_for?(micropost)%>
+                        <%= link_to '<i class="fa fa-heart" style="color:red"></i>'.html_safe, like_user_micropost_path(user,micropost), method: :post, remote: true %>
+                        <%else%>
+                        <%= link_to '<i class="far fa-heart" style="color:red"></i>'.html_safe, like_user_micropost_path(user,micropost), method: :post, remote: true %>
+                        <%end%>
+                        </span>
+
+                        <span>
+                            <%=pluralize(micropost.get_upvotes.size,'Like')%>
+                        </span>
+                    </li>
+                </ul>
+                    <%if current_page?(user_path(current_user))%>
+                        <%= link_to 'Edit', edit_user_micropost_path(user,micropost), class: 'text-muted', remote: true %>
+                        <%= link_to 'Destroy', user_micropost_path(user,micropost), class: 'text-muted', method: :delete, data: { confirm: 'Are you sure?', remote: true }, id: 'delete'%>
+                    <%end%>
+            </div>
+        <%end%>
+        
+</div>

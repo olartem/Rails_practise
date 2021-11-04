@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-  resources :users do 
+  resources :users do
     resources :microposts do 
       member do
         post 'like' => 'microposts#like'
@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
-  resources :microposts
+  resources :microposts, only:[:index]
   resources :home
   resources :secret
   root 'home#index'

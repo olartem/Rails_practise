@@ -1,5 +1,5 @@
 class MicropostsController < ApplicationController
-    before_action :set_micropost, only: %i[like]
+    before_action :set_micropost, only: %i[like destroy update edit]
     before_action :authenticate_user!, only: [ :like ]
     
     def index 
@@ -17,6 +17,30 @@ class MicropostsController < ApplicationController
         @user=current_user
     end
 
+    def edit
+    end
+
+    def update
+        respond_to do |format|
+          if @micropost.update(micropost_params)
+            format.html { redirect_to @user, notice: "Micropost was successfully updated." }
+            format.json { render :show, status: :ok, location: @micropost }
+          else
+            format.html { render :edit, status: :unprocessable_entity }
+            format.json { render json: @micropost.errors, status: :unprocessable_entity }
+          end
+        end
+    end
+
+    def destroy
+        @micropost.destroy
+        respond_to do |format|
+          format.js 
+          format.html { redirect_to @user, notice: "Micropost was successfully destroyed." }
+          format.json { head :no_content }
+        end
+    end
+
     def like
         if current_user.voted_for? @micropost
             @micropost.unliked_by current_user
@@ -31,7 +55,7 @@ class MicropostsController < ApplicationController
     end
 
     def set_micropost
-        @user=User.find(params[:id])
-        @micropost = @user.microposts.find(params[:user_id])
+        @user = User.find(params[:user_id])
+        @micropost = Micropost.find(params[:id])
     end
 end
