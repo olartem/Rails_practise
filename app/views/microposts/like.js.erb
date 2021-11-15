@@ -1,2 +1,2 @@
-$("#likes").html("<%= j render 'microposts/posts_form', user: @user %>");
+$("#like-link-<%=@micropost.id%>").html("<%= j render 'microposts/like_link', user: @user, micropost: @micropost %>");
 $("#all-likes-count").html("<%= j render 'microposts/all_likes'%>");

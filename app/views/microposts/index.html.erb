@@ -22,9 +22,9 @@ body {
                     
                     <% @users.each do |user|%>
                         <%if user.avatar.attached?%>
-                            <img src="<%=(url_for(user.avatar) )%>" style="float:left" alt="..." width="50" class="rounded mb-2 img-thumbnail mr-2">
+                            <img src="<%=(url_for(user.avatar) )%>" style="float:left" alt="..." width="50" height="50" class="rounded-circle mb-2 img-thumbnail mr-2">
                         <%else%>
-                            <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" style="float:left"; alt="..." width="50" class="rounded mb-2 img-thumbnail mr-2">  
+                            <img src="https://www.tenforums.com/geek/gars/images/2/types/thumb_15951118880user.png" style="float:left" alt="..." height="50" width="50" class="rounded-circle mb-2 img-thumbnail mr-2">  
                         <%end%>
 
                         <br><h5 class="mb-3 ml-3"><%=link_to "#{user.name.capitalize}'s posts", user_path(user), style:'color:black'%></h5>
@@ -37,9 +37,9 @@ body {
                             <ul class="list-inline small text-muted mt-3 mb-0">
                                 <li class="list-inline-item">
                                 <%if user_signed_in? && current_user.voted_for?(micropost)%>
-                                <i class='fa fa-heart' style = 'color:red'></i><%= render "microposts/likes", micropost: micropost %>
+                                <i class='fa fa-heart mr-1' style = 'color:red'></i><%= render "microposts/like_count", micropost: micropost %>
                                 <%else%>
-                                <i class='fa fa-heart-o' style = 'color:red'></i><%= render "microposts/likes", micropost: micropost %>
+                                <i class='far fa-heart mr-1' style = 'color:red'></i><%= render "microposts/like_count", micropost: micropost %>
                                 <%end%>
                                 </li>
                             </ul>

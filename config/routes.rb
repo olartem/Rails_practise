@@ -1,6 +1,12 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :microposts
+
+      root to: "users#index"
+    end
   devise_for :users
-  resources :users do
+  resources :users, except: [:index] do
     resources :microposts do 
       member do
         post 'like' => 'microposts#like'

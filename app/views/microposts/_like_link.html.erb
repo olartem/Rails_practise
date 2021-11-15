@@ -1,0 +1,15 @@
+<span id=<%="like-link-#{micropost.id}"%>>
+        
+    <span>
+        <%if current_user.voted_for?(micropost)%>
+            <%= link_to '<i class="fa fa-heart" style="color:red"></i>'.html_safe, like_user_micropost_path(@user,micropost), method: :post, remote: true %>
+        <%else%>
+            <%= link_to '<i class="far fa-heart" style="color:red"></i>'.html_safe, like_user_micropost_path(@user,micropost), method: :post, remote: true %>
+        <%end%>
+    </span>
+
+    <span>
+        <%=pluralize(micropost.get_upvotes.size,'Like')%>
+    </span>
+
+</span>

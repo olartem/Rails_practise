@@ -8,14 +8,7 @@ class UsersController < ApplicationController
 
   # GET /users/1 or /users/1.json
   def show
-    @count=0
-    @user.microposts.each do |micropost|
-      @count+=micropost.get_upvotes.size
-    end
-    respond_to do |format|
-      format.js {render layout: false}
-      format.html {render 'show'}
-    end
+    @best_post = best_post
   end
 
   # GET /users/new
@@ -64,6 +57,19 @@ class UsersController < ApplicationController
     end
   end
   
+  def best_post()
+    max = 0
+    
+    @user.microposts.each do |micropost|
+        micropost.get_upvotes.size
+        if max < (micropost.get_upvotes.size) 
+            max = micropost.get_upvotes.size
+            @best_micropost = micropost
+        end
+    end 
+    @best_micropost
+  end
+
   def likes_count
     count=0
     self.microposts.each do |micropost|

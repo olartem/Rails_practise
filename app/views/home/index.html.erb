@@ -3,7 +3,7 @@
       background-image: url(landing_img.jpg);
       background-size: cover;
       background-position: center;
-      min-height: 921px;
+      min-height: 100%;
       border-radius: 0px!important;
       padding: 150px 0;
       }
@@ -15,8 +15,8 @@
     <div class="col col-sm-12 col-xs-12 col-md-5">
       <div class="pt-4 mt-4">
         <h1 class="display-4">Flats</h1>
+      </div>
     </div>
-  </div>
   <div class="row">
     <div class="col-lg-5 col-sm-12 col-xs-12 col-md-12">
       <div class="pt-4 mt-4">
@@ -28,8 +28,9 @@
     </div>
     <div class="col-lg-5 col-sm-12 col-xs-12 col-md-12 offset-lg-1" style = "color: white">
       <div class="pt-4 mt-4">
-
+      <%if !current_user%>
       <%= render "devise/sessions/new" %>
+      <%end%>
       </div> 
     </div>
     

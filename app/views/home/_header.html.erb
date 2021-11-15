@@ -12,6 +12,11 @@
         <li class="nav-item">
           <%= link_to "Microposts", microposts_path, class: "nav-link active", aria_current: "page"%>
         </li>
+        <%if current_user.is_admin?%>
+        <li class="nav-item">
+          <%= link_to "Dashboard", admin_root_path, class: "nav-link active", aria_current: "page"%>
+        </li>
+        <%end%>
       </ul>
       <div class="d-grid gap-1 d-lg-flex justify-content-xxl-end">
       <% if user_signed_in? %>
