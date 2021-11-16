@@ -31,6 +31,9 @@ gem 'factory_bot_rails'
 gem 'meta-tags'
 gem 'devise'
 gem 'rails-controller-testing'
+gem 'acts_as_votable'
+gem 'jquery-rails'
+gem "administrate"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

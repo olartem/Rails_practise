@@ -1,8 +1,14 @@
 FactoryBot.define do
-    sequence(:email){|n| "test-#{n.to_s.rjust(3,'0')}@mail.com"}
     factory :user do
-        email {FactoryBot.generate :email}
-        password {"123456"}
-        name {"test"}
+        id {1}
+        email {"test@user.com"}
+        password {"qwerty"}
+        name {"test-name"}
+    end
+    factory :admin do
+        id {1}
+        email {"test@admin.com"}
+        password {"qwerty"}
+        name{"admin-name"}
     end
 end

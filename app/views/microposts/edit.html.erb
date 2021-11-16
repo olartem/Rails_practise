@@ -1,8 +1,8 @@
 <%= stylesheet_link_tag 'login' %>
 
 <div class="signup-form pt-5">
-  <%= form_with model:[@user,@user.microposts.build] do |f| %>
-    <h2>New micropost</h2>
+  <%= form_with model:[@user,@micropost], method: :patch do |f| %>
+    <h2>Edit micropost</h2>
 
     <div class="form-group">
       <div class="input-group">
@@ -20,7 +20,7 @@
     
     <div class="form-group">
       <div class="actions">
-        <%= f.submit "Post", class: "btn btn-outline-dark btn-block btn-lg"%>
+        <%= f.submit "Edit", class: "btn btn-outline-dark btn-block btn-lg"%>
       </div>
     </div>
   <% end %>

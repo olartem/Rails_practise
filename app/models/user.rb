@@ -6,4 +6,6 @@ class User < ApplicationRecord
   has_many :microposts, dependent: :destroy
   validates :name, :email, presence: true, uniqueness: true
   validates :email, format: {with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/} 
+  has_one_attached :avatar
+  acts_as_voter
 end
