@@ -26,7 +26,7 @@ body {
                     
                     <div class="media-body mb-5 text-white">
                         <h4 class="mt-0 mb-0"><%=@user.name.capitalize%></h4>
-                        <p class="small mb-4"> <i class="fa fa-user mr-2"></i><%=time_ago_in_words(last_action(@user)) +" ago" %></p>
+                        <p class="small mb-4"> <i class="fa fa-user mr-2"></i><%=time_ago_in_words(@last_action) +" ago" %></p>
                          <%if current_page?(user_path(current_user))%>
                         <%= link_to "New micropost", new_user_micropost_path(@user), class: "btn btn-outline-light btn-sm btn-block mb-3" %>
                         <%end%>
@@ -43,7 +43,7 @@ body {
                     <li class="list-inline-item">
                       <h5 class="font-weight-bold mb-0 d-block"><%=@user.microposts.all.count%></h5><small class="text-muted"> <i class="fa fa-paper-plane mr-1"></i>Microposts</small>
                     </li>
-                    <%if has_liked_posts?(@user)%>
+                    <%if @has_liked_posts%>
                     <li class="list-inline-item">
                       <h5 class="font-weight-bold mb-0 d-block"><%=@best_post.title%></h5><small class="text-muted"> <i class="fa fa-fire mr-1"></i>Best post</small>
                     </li>

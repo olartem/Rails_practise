@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  before_action :set_user, :authenticate_user!, only: %i[ show edit update destroy likes_count]
+  before_action :set_user, :authenticate_user!, only: %i[ show edit update destroy likes_count ]
 
   # GET /users or /users.json
   def index
@@ -9,6 +9,8 @@ class UsersController < ApplicationController
   # GET /users/1 or /users/1.json
   def show
     @best_post = best_post
+    @last_action = last_action
+    @has_liked_posts = has_liked_posts?
   end
 
   # GET /users/new
@@ -70,10 +72,28 @@ class UsersController < ApplicationController
     @best_micropost
   end
 
-  def likes_count
-    count=0
-    self.microposts.each do |micropost|
-      count+=micropost.get_upvotes.size
+  def has_liked_posts?()
+    max = 0
+    
+    @user.microposts.each do |micropost|
+        micropost.get_upvotes.size
+        if max < (micropost.get_upvotes.size) 
+            max = micropost.get_upvotes.size
+            @best_micropost = micropost
+        end
+    end 
+    if (@best_micropost.nil?)    
+        false            
+    else
+        true
+    end
+  end
+
+  def last_action()
+    if !@user.microposts.empty?
+        @last_action = [@user.microposts.last.created_at, @user.microposts.last.updated_at].max
+    else
+        @last_action = @user.created_at
     end
   end
 
